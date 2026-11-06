@@ -29,17 +29,17 @@ fun MarcadorSelector(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
-        BotonGol(simbolo = "+", onClick = onSumar, activo = goles < 9)
+        // Los botones se ven siempre; solo actúan si el número sigue entre 0 y 9
+        BotonGol(simbolo = "+", onClick = { if (goles < 9) onSumar() })
         Text(text = "$goles", style = MaterialTheme.typography.headlineMedium)
-        BotonGol(simbolo = "−", onClick = onRestar, activo = goles > 0)
+        BotonGol(simbolo = "−", onClick = { if (goles > 0) onRestar() })
     }
 }
 
 @Composable
-private fun BotonGol(simbolo: String, onClick: () -> Unit, activo: Boolean) {
+private fun BotonGol(simbolo: String, onClick: () -> Unit) {
     OutlinedButton(
         onClick = onClick,
-        enabled = activo,
         modifier = Modifier.size(width = 48.dp, height = 32.dp),
         contentPadding = PaddingValues(0.dp)
     ) {
