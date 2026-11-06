@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Porra DAM</string>
+
+    <!-- 0 · Bienvenida -->
+    <string name="titulo_porra">PORRA</string>
+    <string name="titulo_dam">DAM</string>
+    <string name="bienvenida_subtitulo">Pronostica los partidos de cada jornada y compite con tu clase. ¿Quién acertará más?</string>
+    <string name="bienvenida_alias">Tu alias</string>
+    <string name="bienvenida_codigo">Código del grupo</string>
+    <string name="bienvenida_entrar">Entrar en la porra</string>
+    <string name="extra">EXTRA</string>
+
+    <!-- 1 · Jornada -->
+    <string name="jornada_titulo">Porra DAM · Jornada %1$d</string>
+    <string name="jornada_guardar">Guardar</string>
+    <string name="jornada_guardado">Guardado</string>
+
+    <!-- Barra inferior (EXTRA: NavigationBar es del Tema 3) -->
+    <string name="nav_jornada">Jornada</string>
+    <string name="nav_resultados">Resultados</string>
+    <string name="nav_clasificacion">Clasificación</string>
+</resources>
