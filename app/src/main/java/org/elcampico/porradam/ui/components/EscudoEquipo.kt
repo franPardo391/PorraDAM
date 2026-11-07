@@ -16,16 +16,20 @@ import org.elcampico.porradam.data.JornadaDePrueba
 import org.elcampico.porradam.data.model.Equipo
 import org.elcampico.porradam.ui.theme.PorraDamTheme
 
-// Todos los equipos usan la misma imagen: res/drawable/escudo.
-// (El PDF dibuja un círculo con el color y las iniciales; aquí se cambia por una imagen.)
+// El escudo de cada equipo es una imagen de res/drawable.
+// El modelo no sabe nada de imágenes: la interfaz la elige por las iniciales.
 @Composable
 fun EscudoEquipo(
     equipo: Equipo,
     modifier: Modifier = Modifier,
-    tamano: Dp = 36.dp
+    tamano: Dp = 44.dp
 ) {
+    val imagen = when (equipo.iniciales) {
+        "RM" -> R.drawable.escudo_madrid
+        else -> R.drawable.escudo_barca
+    }
     Image(
-        painter = painterResource(R.drawable.escudo),
+        painter = painterResource(imagen),
         contentDescription = equipo.nombre,
         contentScale = ContentScale.Fit,
         modifier = modifier.size(tamano)
@@ -38,7 +42,7 @@ private fun EscudoEquipoPreview() {
     PorraDamTheme {
         Row(Modifier.padding(8.dp)) {
             EscudoEquipo(JornadaDePrueba.partidos[0].local)
-            EscudoEquipo(JornadaDePrueba.partidos[1].visitante, Modifier.padding(start = 8.dp), tamano = 56.dp)
+            EscudoEquipo(JornadaDePrueba.partidos[0].visitante, Modifier.padding(start = 8.dp))
         }
     }
 }

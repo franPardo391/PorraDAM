@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Escudo provisional del Barça. Para poner el de verdad: borra este fichero y pega escudo_barca.png aquí. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp" android:height="36dp"
+    android:viewportWidth="32" android:viewportHeight="36">
+    <path android:fillColor="#B0B0B0" android:pathData="M16,1L30,6V17C30,26 23,32 16,35C9,32 2,26 2,17V6Z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M16,5L26,8.6V17C26,23.5 21,28 16,30.6C11,28 6,23.5 6,17V8.6Z" />
+    <path android:fillColor="#B0B0B0" android:pathData="M16,9L22,11.2V17C22,21 19,24 16,25.6C13,24 10,21 10,17V11.2Z" />
+</vector>

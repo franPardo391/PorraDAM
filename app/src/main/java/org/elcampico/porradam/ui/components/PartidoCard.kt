@@ -1,29 +1,31 @@
 package org.elcampico.porradam.ui.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.elcampico.porradam.data.JornadaDePrueba
 import org.elcampico.porradam.data.model.Equipo
 import org.elcampico.porradam.data.model.Marcador
 import org.elcampico.porradam.data.model.Partido
-import org.elcampico.porradam.ui.theme.GrisCaja
+import org.elcampico.porradam.ui.theme.Amarillo
+import org.elcampico.porradam.ui.theme.Noche
 import org.elcampico.porradam.ui.theme.PorraDamTheme
 
-// Un partido: la fila del local encima de la del visitante, cada una con su selector.
+// Un partido como un marcador de estadio: local · dígitos · visitante.
 @Composable
 fun PartidoCard(
     partido: Partido,
@@ -31,62 +33,60 @@ fun PartidoCard(
     onCambiar: (Marcador) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
+    Card(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(6.dp)
+        shape = RoundedCornerShape(18.dp),
+        colors = CardDefaults.cardColors(containerColor = Noche.copy(alpha = 0.92f))
     ) {
-        FilaEquipo(
-            equipo = partido.local,
-            goles = pronostico.local,
-            onSumar = { onCambiar(pronostico.copy(local = pronostico.local + 1)) },
-            onRestar = { onCambiar(pronostico.copy(local = pronostico.local - 1)) }
-        )
-        FilaEquipo(
-            equipo = partido.visitante,
-            goles = pronostico.visitante,
-            onSumar = { onCambiar(pronostico.copy(visitante = pronostico.visitante + 1)) },
-            onRestar = { onCambiar(pronostico.copy(visitante = pronostico.visitante - 1)) }
-        )
+        Row(
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            ColumnaEquipo(partido.local, Modifier.weight(1f))
+            MarcadorSelector(
+                goles = pronostico.local,
+                onSumar = { onCambiar(pronostico.copy(local = pronostico.local + 1)) },
+                onRestar = { onCambiar(pronostico.copy(local = pronostico.local - 1)) }
+            )
+            Text(
+                text = ":",
+                modifier = Modifier.padding(horizontal = 6.dp),
+                style = MaterialTheme.typography.displayLarge,
+                color = Amarillo
+            )
+            MarcadorSelector(
+                goles = pronostico.visitante,
+                onSumar = { onCambiar(pronostico.copy(visitante = pronostico.visitante + 1)) },
+                onRestar = { onCambiar(pronostico.copy(visitante = pronostico.visitante - 1)) }
+            )
+            ColumnaEquipo(partido.visitante, Modifier.weight(1f))
+        }
     }
 }
 
 // La «fila de un equipo» que se repite dos veces en cada partido (paso 1 del MP.2)
 @Composable
-fun FilaEquipo(
-    equipo: Equipo,
-    goles: Int,
-    onSumar: () -> Unit,
-    onRestar: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
+private fun ColumnaEquipo(equipo: Equipo, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(6.dp)
     ) {
-        Box(
-            modifier = Modifier
-                .size(44.dp)
-                .background(GrisCaja, RoundedCornerShape(8.dp)),
-            contentAlignment = Alignment.Center
-        ) {
-            EscudoEquipo(equipo, tamano = 32.dp)
-        }
+        EscudoEquipo(equipo)
         Text(
             text = equipo.nombre,
-            modifier = Modifier
-                .weight(1f)
-                .padding(horizontal = 14.dp),
-            style = MaterialTheme.typography.bodyLarge,
-            maxLines = 1
+            style = MaterialTheme.typography.labelMedium,
+            color = Color.White,
+            textAlign = TextAlign.Center,
+            maxLines = 2
         )
-        MarcadorSelector(goles = goles, onSumar = onSumar, onRestar = onRestar)
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 private fun PartidoCardPreview() {
     PorraDamTheme {
-        PartidoCard(JornadaDePrueba.partidos[0], Marcador(2, 1), onCambiar = {}, Modifier.padding(16.dp))
+        PartidoCard(JornadaDePrueba.partidos[0], Marcador(2, 1), onCambiar = {})
     }
 }

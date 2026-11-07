@@ -23,6 +23,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,11 +38,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import org.elcampico.porradam.R
 import org.elcampico.porradam.ui.components.FondoEstadio
+import org.elcampico.porradam.ui.theme.Amarillo
+import org.elcampico.porradam.ui.theme.Marcador
+import org.elcampico.porradam.ui.theme.Noche
 import org.elcampico.porradam.ui.theme.PorraDamTheme
-import org.elcampico.porradam.ui.theme.Tinta
-import org.elcampico.porradam.ui.theme.VerdeTitulo
+import org.elcampico.porradam.ui.theme.TextoSuave
 
 // 0 · Bienvenida. Según el MP.1 es del Tema 3 (ampliación): aquí solo la parte visual.
 @Composable
@@ -56,8 +60,8 @@ fun PantallaBienvenida(
     Box(modifier.fillMaxSize()) {
         FondoEstadio(
             scrim = Brush.verticalGradient(
-                0.35f to Color.Transparent,
-                1f to Color.Black.copy(alpha = 0.75f)
+                0.3f to Color.Transparent,
+                1f to Noche.copy(alpha = 0.95f)
             )
         )
 
@@ -67,50 +71,38 @@ fun PantallaBienvenida(
                 .fillMaxWidth()
                 .systemBarsPadding()
                 .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Row {
-                Text(stringResource(R.string.titulo_porra), style = MaterialTheme.typography.displayMedium, color = Color.White)
-                Text(" " + stringResource(R.string.titulo_dam), style = MaterialTheme.typography.displayMedium, color = VerdeTitulo)
+                Text(stringResource(R.string.titulo_porra), style = MaterialTheme.typography.displayLarge, color = Color.White)
+                Text(" " + stringResource(R.string.titulo_dam), style = MaterialTheme.typography.displayLarge, color = Amarillo)
             }
             Text(
                 text = stringResource(R.string.bienvenida_subtitulo),
                 style = MaterialTheme.typography.bodyLarge,
-                color = Color.White
+                color = Color.White.copy(alpha = 0.85f)
             )
 
             Card(
-                shape = RoundedCornerShape(20.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White)
+                shape = RoundedCornerShape(18.dp),
+                colors = CardDefaults.cardColors(containerColor = Noche.copy(alpha = 0.92f))
             ) {
                 Column(
-                    modifier = Modifier.padding(18.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    Campo(
-                        etiqueta = stringResource(R.string.bienvenida_alias),
-                        pista = stringResource(R.string.bienvenida_alias_pista),
-                        icono = Icons.Default.Person,
-                        valor = alias,
-                        onCambio = { alias = it }
-                    )
-                    Spacer(Modifier.height(4.dp))
-                    Campo(
-                        etiqueta = stringResource(R.string.bienvenida_codigo),
-                        pista = stringResource(R.string.bienvenida_codigo_pista),
-                        icono = Icons.Default.AccountCircle,
-                        valor = codigo,
-                        onCambio = { codigo = it }
-                    )
+                    Campo(stringResource(R.string.bienvenida_alias), stringResource(R.string.bienvenida_alias_pista), Icons.Default.Person, alias) { alias = it }
+                    Campo(stringResource(R.string.bienvenida_codigo), stringResource(R.string.bienvenida_codigo_pista), Icons.Default.AccountCircle, codigo) { codigo = it }
                 }
             }
 
             Button(
                 onClick = onEntrar,
                 modifier = Modifier.fillMaxWidth().height(56.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Tinta, contentColor = Color.White)
+                shape = RoundedCornerShape(14.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Amarillo, contentColor = Marcador)
             ) {
-                Text(stringResource(R.string.bienvenida_entrar), style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(R.string.bienvenida_entrar), style = MaterialTheme.typography.titleLarge, letterSpacing = 2.sp)
                 Spacer(Modifier.width(10.dp))
                 Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null)
             }
@@ -118,18 +110,25 @@ fun PantallaBienvenida(
     }
 }
 
-// Etiqueta en mayúsculas encima y el campo con su icono (EXTRA)
+// Etiqueta pequeña encima y el campo con su icono (EXTRA)
 @Composable
 private fun Campo(etiqueta: String, pista: String, icono: ImageVector, valor: String, onCambio: (String) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-        Text(etiqueta, style = MaterialTheme.typography.labelLarge)
+        Text(etiqueta, style = MaterialTheme.typography.labelMedium, color = TextoSuave, letterSpacing = 1.sp)
         OutlinedTextField(
             value = valor,
             onValueChange = onCambio,
-            placeholder = { Text(pista) },
-            leadingIcon = { Icon(icono, contentDescription = null) },
+            placeholder = { Text(pista, color = TextoSuave) },
+            leadingIcon = { Icon(icono, contentDescription = null, tint = TextoSuave) },
             singleLine = true,
-            shape = RoundedCornerShape(10.dp),
+            shape = RoundedCornerShape(12.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedTextColor = Color.White,
+                unfocusedTextColor = Color.White,
+                focusedBorderColor = Amarillo,
+                unfocusedBorderColor = TextoSuave.copy(alpha = 0.5f),
+                cursorColor = Amarillo
+            ),
             modifier = Modifier.fillMaxWidth()
         )
     }
