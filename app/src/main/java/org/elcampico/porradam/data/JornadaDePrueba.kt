@@ -5,6 +5,7 @@ import org.elcampico.porradam.data.model.Partido
 
 object JornadaDePrueba {
     const val numero = 1
+    const val cierre = "Sáb 14 nov · 16:00"
 
     private val marina   = Equipo("Atlético Marina", "AM", 0xFFB3261E)
     private val costa    = Equipo("Racing Costa",    "RC", 0xFF1565C0)

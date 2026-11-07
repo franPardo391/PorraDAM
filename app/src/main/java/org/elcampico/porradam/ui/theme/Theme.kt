@@ -4,21 +4,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
-// La app siempre va sobre la foto del estadio, así que usa un solo esquema.
+// Colores de Material por defecto, cambiando solo el verde.
 // Sin dynamicColor: si no, Android 12+ ignora nuestros colores (Tema 2).
-private val Esquema = lightColorScheme(
-    primary = VerdeCesped,
-    onPrimary = VerdeOscuro,
-    background = Noche,
-    surface = Papel,
-    onSurface = Tinta,
-    onSurfaceVariant = Gris
+private val Claro = lightColorScheme(
+    primary = Verde,
+    onSurface = Tinta
 )
 
 @Composable
 fun PorraDamTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = Esquema,
+        colorScheme = Claro,
         typography = Tipografia,
         content = content
     )

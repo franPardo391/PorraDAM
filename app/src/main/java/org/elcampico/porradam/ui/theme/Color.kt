@@ -2,9 +2,8 @@ package org.elcampico.porradam.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val VerdeCesped = Color(0xFF3DDC84)    // acento: botón Guardar, «DAM» del título
-val VerdeOscuro = Color(0xFF0B2414)    // texto sobre el verde
-val Noche       = Color(0xFF0D1A10)    // fondo detrás de la foto
-val Papel       = Color(0xFFFFFFFF)    // tarjetas
-val Tinta       = Color(0xFF1B1F1A)    // texto sobre tarjetas
-val Gris        = Color(0xFF6B6F68)    // textos secundarios
+val Verde       = Color(0xFF2E7D32)
+val VerdeClaro  = Color(0xFFC8E6C9)    // pastilla de puntos
+val VerdeTitulo = Color(0xFF66BB6A)    // «DAM» del título de Bienvenida
+val Tinta       = Color(0xFF1C1B1F)    // botones negros y texto
+val GrisCaja    = Color(0xFFEFEFEF)    // cajitas del escudo y del número

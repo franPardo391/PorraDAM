@@ -11,6 +11,8 @@ import org.elcampico.porradam.data.model.Marcador
 class JornadaViewModel : ViewModel() {
 
     val numero = JornadaDePrueba.numero
+    val cierre = JornadaDePrueba.cierre
+    val puntos = 0                  // los puntos llegan con Resultados (Tema 3)
     val partidos = JornadaDePrueba.partidos
 
     // Lo que se ve en los selectores (id del partido → marcador)

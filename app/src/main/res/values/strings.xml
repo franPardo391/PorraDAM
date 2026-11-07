@@ -2,18 +2,27 @@
     <string name="app_name">Porra DAM</string>
 
     <!-- 0 · Bienvenida -->
-    <string name="titulo_porra">PORRA</string>
+    <string name="titulo_porra">Porra</string>
     <string name="titulo_dam">DAM</string>
     <string name="bienvenida_subtitulo">Pronostica los partidos de cada jornada y compite con tu clase. ¿Quién acertará más?</string>
-    <string name="bienvenida_alias">Tu alias</string>
-    <string name="bienvenida_codigo">Código del grupo</string>
+    <string name="bienvenida_alias">TU ALIAS</string>
+    <string name="bienvenida_alias_pista">Escribe tu nombre o alias</string>
+    <string name="bienvenida_codigo">CÓDIGO DEL GRUPO</string>
+    <string name="bienvenida_codigo_pista">p. ej. 2º DAM - 2026</string>
     <string name="bienvenida_entrar">Entrar en la porra</string>
     <string name="extra">EXTRA</string>
 
     <!-- 1 · Jornada -->
-    <string name="jornada_titulo">Porra DAM · Jornada %1$d</string>
-    <string name="jornada_guardar">Guardar</string>
-    <string name="jornada_guardado">Guardado</string>
+    <string name="jornada_barra">Porra DAM</string>
+    <string name="jornada_titulo">Jornada %1$d</string>
+    <string name="jornada_subtitulo">Tu porra para esta jornada</string>
+    <string name="jornada_cierre">Se cierra el: %1$s</string>
+    <string name="jornada_puntos">%1$d pts</string>
+    <string name="jornada_guardar">Guardar pronósticos</string>
+    <string name="jornada_guardado">Pronósticos guardados</string>
+    <string name="menu">Menú</string>
+    <string name="sumar_gol">Sumar un gol</string>
+    <string name="restar_gol">Restar un gol</string>
 
     <!-- Barra inferior (EXTRA: NavigationBar es del Tema 3) -->
     <string name="nav_jornada">Jornada</string>
